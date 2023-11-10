@@ -78,19 +78,27 @@ impl Screen {
     /// Draw something to the current frame with the given location and color. This will not be
     /// visible until [`render`](Screen::render) is called.
     pub fn draw<C: VecChar>(&mut self, col: usize, row: usize, chars: C, color: Color) {
-        let mut curr_x = col;
-        for c in chars.char_vec() {
-            self.curr_frame[curr_x][row] = c.with(color);
-            curr_x += 1;
+        match chars.vec_char() {
+            crate::VecOrChar::Vec(the_vec) => {
+                for (idx, c) in the_vec.into_iter().enumerate() {
+                    self.curr_frame[col + idx][row] = c.with(color);
+                }
+            }
+            crate::VecOrChar::Char(the_char) => self.curr_frame[col][row] = the_char.with(color),
         }
     }
     /// Draw something **bold** to the current frame with the given location and color. This will
     /// not be visible until [`render`](Screen::render) is called.
     pub fn draw_bold<C: VecChar>(&mut self, col: usize, row: usize, chars: C, color: Color) {
-        let mut curr_x = col;
-        for c in chars.char_vec() {
-            self.curr_frame[curr_x][row] = c.with(color).attribute(Bold);
-            curr_x += 1;
+        match chars.vec_char() {
+            crate::VecOrChar::Vec(the_vec) => {
+                for (idx, c) in the_vec.into_iter().enumerate() {
+                    self.curr_frame[col + idx][row] = c.with(color).attribute(Bold);
+                }
+            }
+            crate::VecOrChar::Char(the_char) => {
+                self.curr_frame[col][row] = the_char.with(color).attribute(Bold)
+            }
         }
     }
     /// Render the current frame to the screen so it becomes visible, and then clear the current

@@ -3,6 +3,7 @@ use std::ops::{Index, IndexMut};
 use crossterm::style::{Color, Stylize};
 
 /// A `Frame` is what the [`Screen`] uses internally to store text that you draw to it.
+#[derive(Clone)]
 pub struct Frame {
     pub cols: usize,
     pub rows: usize,

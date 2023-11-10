@@ -15,17 +15,28 @@ pub mod prelude {
 /// [`Screen`](crate::screen::Screen)'s `draw*` methods take anything that implements this trait.
 /// Implementations are provided for `&str` and `String`.
 pub trait VecChar {
-    fn char_vec(self) -> Vec<char>;
+    fn vec_char(self) -> VecOrChar;
 }
 
 impl VecChar for &str {
-    fn char_vec(self) -> Vec<char> {
-        self.chars().collect()
+    fn vec_char(self) -> VecOrChar {
+        VecOrChar::Vec(self.chars().collect())
     }
 }
 
 impl VecChar for String {
-    fn char_vec(self) -> Vec<char> {
-        self.chars().collect()
+    fn vec_char(self) -> VecOrChar {
+        VecOrChar::Vec(self.chars().collect())
     }
+}
+
+impl VecChar for char {
+    fn vec_char(self) -> VecOrChar {
+        VecOrChar::Char(self)
+    }
+}
+
+pub enum VecOrChar {
+    Vec(Vec<char>),
+    Char(char),
 }
