@@ -37,8 +37,9 @@ fn main() {
         // Draw the current state of everything
         screen.draw(player_col, 12, "X", Color::Blue);
 
-        // Render everything that has been drawn to the terminal
-        screen.render();
+        // Flip the frames so the one we drew to is visible, and a new blank frame is ready for us
+        // to draw the next frame to.
+        screen.flip();
     }
 }
 

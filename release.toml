@@ -8,4 +8,3 @@ pre-release-replacements = [
     { file = "CHANGELOG.md", search = "<!-- next-header -->", replace = "<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly = 1 },
     { file = "CHANGELOG.md", search = "<!-- next-url -->", replace = "<!-- next-url -->\n[Unreleased]: https://github.com/CleanCut/rusty_textui/compare/{{tag_name}}...HEAD", exactly = 1 },
 ]
-#    {file="src/lib.rs", search="rusty_textui = \".*\"", replace="rusty_textui = \"{{version}}\"", exactly=1},

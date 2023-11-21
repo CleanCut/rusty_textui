@@ -76,7 +76,7 @@ impl Screen {
         events
     }
     /// Draw something to the current frame with the given location and color. This will not be
-    /// visible until [`render`](Screen::render) is called.
+    /// visible until [`flip`](Screen::flip) is called.
     pub fn draw<C: VecChar>(&mut self, col: usize, row: usize, chars: C, color: Color) {
         match chars.vec_char() {
             crate::VecOrChar::Vec(the_vec) => {
@@ -88,7 +88,7 @@ impl Screen {
         }
     }
     /// Draw something **bold** to the current frame with the given location and color. This will
-    /// not be visible until [`render`](Screen::render) is called.
+    /// not be visible until [`flip`](Screen::flip) is called.
     pub fn draw_bold<C: VecChar>(&mut self, col: usize, row: usize, chars: C, color: Color) {
         match chars.vec_char() {
             crate::VecOrChar::Vec(the_vec) => {
@@ -101,9 +101,11 @@ impl Screen {
             }
         }
     }
-    /// Render the current frame to the screen so it becomes visible, and then clear the current
-    /// frame. You will need to use the `draw*` commands to draw your entire scene each frame.
-    pub fn render(&mut self) {
+    /// Flip the frames, taking the frame that was being drawn to and making it visible on the
+    /// screen and taking the frame that was visible, clear it, and set it to be the one drawn to.
+    /// You will need to use the `draw*` commands to draw your entire scene each frame before you
+    /// call flip.
+    pub fn flip(&mut self) {
         // If the terminal is smaller than the screen we want, then abort.
         if let Ok((curr_cols, curr_rows)) = size() {
             if (curr_cols as usize) < self.cols || (curr_rows as usize) < self.rows {
