@@ -3,6 +3,10 @@
 
 ## [0.2.0] - 2023-11-21
 
+## Changed
+
+- Renamed `Screen::render` to `Screen::flip`
+
 ## [0.1.0] - 2023-11-10
 
 ## Initial release
