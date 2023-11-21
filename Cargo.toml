@@ -1,6 +1,6 @@
 [package]
 name = "rusty_textui"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "Library for creating simple text user interfaces, like text arcade games in the terminal "
 homepage = "https://github.com/CleanCut/rusty_textui"
