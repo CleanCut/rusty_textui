@@ -30,6 +30,12 @@ impl VecChar for String {
     }
 }
 
+impl VecChar for &String {
+    fn vec_char(self) -> VecOrChar {
+        VecOrChar::Vec(self.chars().collect())
+    }
+}
+
 impl VecChar for char {
     fn vec_char(self) -> VecOrChar {
         VecOrChar::Char(self)

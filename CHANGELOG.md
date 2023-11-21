@@ -1,6 +1,8 @@
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+- Added `VecChar` trait implementation for `&String` for convenience.
+
 ## [0.2.0] - 2023-11-21
 
 ## Changed
